@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ぐりぐり動く☆おみくじ</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle, #fff0f5, #ffe4e1);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #ff69b4;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      font-size: 2em;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    main {
+      flex: 1;
+      max-width: 600px;
+      margin: 50px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      position: relative;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 12px 24px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s;
+    }
+
+    button:hover {
+      background-color: #e05599;
+      transform: rotate(5deg);
+    }
+
+    #result {
+      font-size: 28px;
+      margin-top: 30px;
+      color: #444;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.5s ease;
+    }
+
+    #result.show {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    ぐりぐり動く☆おみくじ
+  </header>
+
+  <main>
+    <p>運命、ぐるぐる回してみよう！</p>
+    <button onclick="drawOmikuji(this)">おみくじを引く！</button>
+    <div id="result"></div>
+  </main>
+
+  <footer>
+    &copy; 2025 中西動作研究所
+  </footer>
+
+  <script>
+    function drawOmikuji(button) {
+      const results = [
+        '超大吉！今日は何しても最高！',
+        '大吉！いいことありそう！',
+        '中吉！まぁまぁ良き日！',
+        '小吉！ぼちぼちいこ〜',
+        '末吉…ちょい運気控えめ！',
+        '凶！でも逆にラッキーかも？'
+      ];
+      const rand = Math.floor(Math.random() * results.length);
+      const resultDiv = document.getElementById('result');
+      
+      // リセット
+      resultDiv.classList.remove('show');
+      
+      // ちょい時間差で表示
+      setTimeout(() => {
+        resultDiv.textContent = results[rand];
+        resultDiv.classList.add('show');
+      }, 100);
+
+      // ボタンクリック時にちょっとだけ回転アニメーション
+      button.style.transform = 'rotate(360deg)';
+      setTimeout(() => {
+        button.style.transform = 'rotate(0deg)';
+      }, 400);
+    }
+  </script>
+
+</body>
+</html>
